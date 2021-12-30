@@ -5,43 +5,46 @@ import '@stream-io/stream-chat-css/dist/css/index.css';
 import Auth from './components/Auth';
 import MessagingContainer from './components/MessagingContainer';
 import Video from './components/Video';
+import {useCookies} from 'react-cookie'
 
 const client = StreamChat.getInstance('jzwcy2xnrazh');
 
 const App = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const [clientReady, setClientReady] = useState(false);
   const [channel, setChannel] = useState(null)
 
-  const authToken = false
+  const authToken = cookies.AuthToken
 
-  useEffect(() => {
-    const setupClient = async () => {
-      try {
-        await client.connectUser(
-          {
-            id: 'dave-matthews',
-            name: 'Dave Matthews',
-          },
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZGF2ZS1tYXR0aGV3cyJ9.Jfa8HmcUnyqiZaVeE1ApOhTiKX-Q8Ug0qYEpeyjx_lc',
-        )
+  // useEffect(() => {
+   
+  // }, []);
 
-        const channel = await client.channel('gaming', 'gaming-demo', {
-          name: "Gaming Channel"
-        })
+  const setupClient = async () => {
+    try {
+      await client.connectUser(
+        {
+          id: cookies.UserId,
+          name: cookies.Name,
+          hashedPassword: cookies.HashedPassword
+        },
+        authToken
+      )
 
-        setChannel(channel)
+      const channel = await client.channel('gaming', 'gaming-demo', {
+        name: "Gaming Channel"
+      })
 
-        setClientReady(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+      setChannel(channel)
 
-    setupClient();
-  }, []);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  if (!clientReady) return null;
+  if(authToken) setupClient();
 
+  
   return (
     <>
       {!authToken && <Auth /> }
