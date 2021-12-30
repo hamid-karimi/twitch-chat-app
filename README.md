@@ -16,7 +16,7 @@ In a new tab, go into the client directory. We will need to install the packages
 
 Install all the packages you need by running the command in your terminal.
 
-### `npm run start`
+### `npm run start:frontend`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
