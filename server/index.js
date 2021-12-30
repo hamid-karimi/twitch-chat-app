@@ -10,9 +10,6 @@ const StreamChat = require('stream-chat').StreamChat
 app.use(cors())
 app.use(express.json())
 
-const API_KEY = 'jzwcy2xnrazh'
-const API_SECRET = 'vq48h6hwuqzsnah6f9hb77dvvt5khmw4vzbb82nd222fbp8zyug385zbg97xhv7b'
-const APP_ID = '1156395'
 
 //sign up
 
@@ -22,12 +19,11 @@ app.post('/signup', async(req, res) => {
 
         const userId = uuidv1()
         const hashedPassword = await bcrypt.hash(password, 10)
-        const client = connect(API_KEY, API_SECRET, APP_ID)
+        const client = connect(process.env.API_KEY, process.env.API_SECRET, process.env.APP_ID)
         const token = client .createUserToken(userId)
 
         res.status(200).json({username, userId, hashedPassword, token})
-
-        // console.log(username, hashedPassword)
+        
     }catch(error){
         console.log(error)
         res.status(500).json({message: error})
@@ -39,8 +35,8 @@ app.post('/signup', async(req, res) => {
 app.post('/login', async(req, res) => {
     try{
         const {username, password} = req.body
-        const client = connect(API_KEY, API_SECRET, APP_ID)
-        const chatClient = StreamChat.getInstance(API_KEY, API_SECRET)
+        const client = connect(process.env.API_KEY, process.env.API_SECRET, process.env.APP_ID)
+        const chatClient = StreamChat.getInstance(process.env.API_KEY, process.env.API_SECRET)
         const {users} = await chatClient.queryUsers({name: username})
 
         if(!users.length)
@@ -51,7 +47,7 @@ app.post('/login', async(req, res) => {
         const confirmedName = users[0].name
         const userId = users[0].id
         if(success)
-            res.status(200).json({token, username: confirmedName, userId})
+            res.status(200).json({token, username: confirmedName, userId, hashedPassword})
         else
             res.status(500).json({message: 'Login failed!'})
 

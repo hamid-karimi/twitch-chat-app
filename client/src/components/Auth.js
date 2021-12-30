@@ -22,8 +22,6 @@ const Auth = () => {
             password
         })
 
-        console.log(response)
-
         setCookie('Name', response.data.username)
         setCookie('HashedPassword', response.data.hashedPassword)
         setCookie('UserId', response.data.userId)

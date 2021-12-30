@@ -10069,6 +10069,11 @@
   dependencies:
     "fscreen" "^1.0.2"
 
+"react-icons@^4.3.1":
+  "integrity" "sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.3.1.tgz"
+  "version" "4.3.1"
+
 "react-images@1.2.0-beta.7":
   "integrity" "sha512-/ewkPwkwJDqTmc0HMPccFPE5H4A6JVRCfMahBc2j9DTBPmdANSXAglTlYLgZC8Q7iZQjGFado3OxixSrog/02w=="
   "resolved" "https://registry.npmjs.org/react-images/-/react-images-1.2.0-beta.7.tgz"
@@ -10129,7 +10134,7 @@
     "prop-types" "^15.5.8"
     "raf" "^3.1.0"
 
-"react-player@^2.7.0":
+"react-player@^2.7.0", "react-player@^2.9.0":
   "integrity" "sha512-jNUkTfMmUhwPPAktAdIqiBcVUKsFKrVGH6Ocutj6535CNfM91yrvWxHg6fvIX8Y/fjYUPoejddwh7qboNV9vGA=="
   "resolved" "https://registry.npmjs.org/react-player/-/react-player-2.9.0.tgz"
   "version" "2.9.0"
