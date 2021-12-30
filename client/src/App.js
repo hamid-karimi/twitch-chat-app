@@ -11,6 +11,10 @@ import {customStyles} from './styles/cutomStyles'
 const client = StreamChat.getInstance('jzwcy2xnrazh')
 
 const App = () => {
+  useEffect(() => {
+    document.title = "Twicth Chat App"
+ }, []);
+
   const [cookies, setCookie, removeCookie] = useCookies(['user'])  
   const [channel, setChannel] = useState(null)
   const [users, setUsers] = useState(null)
